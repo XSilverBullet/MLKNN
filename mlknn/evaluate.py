@@ -33,17 +33,19 @@ class Evaluate(object):
         return hanmming_loss
 
     def one_error(self):
-        test_data_num = self.predict_rf[0]
+        test_data_num = self.predict_rf.shape[0]
         class_num = self.predict_rf.shape[1]
 
         num = 0
         one_error = 0
         for i in range(test_data_num):
             if sum(self.predict_labels[i])!= class_num and sum(self.test_labels[i])!=0:
-                MAX = float(-np.inf)
-                for j, each_label in self.predict_labels[i]:
-                    if each_label > MAX:
+                MAX = -np.inf
+                print(len(self.predict_labels[i]))
+                for j in range(len(self.predict_labels[i])):
+                    if self.predict_labels[i][j] > MAX:
                         index = j
+                        MAX = self.predict_labels[i][index]
                 num += 1
                 if self.test_labels[i][index]!=1:
                     one_error += 1

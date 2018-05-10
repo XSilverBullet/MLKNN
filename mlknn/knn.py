@@ -23,7 +23,7 @@ def knn(sample, dataset, k):
     distances = sqDistances ** 0.5
     sorted_dist_indicies = distances.argsort()
 
-    if k > datasize:
+    if k > dataset_size:
         return None, None
     #print(sorted_dist_indicies)
     # class_count = {}
@@ -36,14 +36,14 @@ def knn(sample, dataset, k):
 
     return sorted_dist_indicies[:k], distances[:k]
 
-if __name__=="__main__":
-    #test
-   datasize = 30
-   dataset = np.random.rand(datasize*2).reshape(datasize,2)
-   #labels = np.random.randint(1, 3, datasize)
-   # print(labels)
-   # print(dataset)
-   index, distances = knn(dataset[0], dataset, 4)
-   print(index)
-   print(distances)
+# if __name__=="__main__":
+#     #test
+#    datasize = 30
+#    dataset = np.random.rand(datasize*2).reshape(datasize,2)
+#    #labels = np.random.randint(1, 3, datasize)
+#    # print(labels)
+#    # print(dataset)
+#    index, distances = knn(dataset[0], dataset, 4)
+#    print(index)
+#    print(distances)
 
