@@ -30,6 +30,7 @@ class mlknn(object):
 
     def fit(self):
 
+        print("start to training...")
         # cal ph0 , ph1
         for i in range(self.train_lables_num):
             y = 0
@@ -60,6 +61,7 @@ class mlknn(object):
             for l in range(self.k + 1):
                 self.PEH1[i][l] = (self.s + c1[l]) / (self.s * (self.k + 1) + c1.sum())
                 self.PEH0[i][l] = (self.s + c0[l]) / (self.s * (self.k + 1) + c0.sum())
+        print("training finished...")
 
     def predict(self, test_data):
         self.rtl = np.zeros((test_data.shape[0], self.train_lables_num))
@@ -85,7 +87,7 @@ class mlknn(object):
                     self.predict_labels[i][j] = 1
                 else:
                     self.predict_labels[i][j] = 0
-        print(self.predict_labels)
+        #print(self.predict_labels)
         return self.predict_labels
 
     def evaluate(self, test_labels):
@@ -97,24 +99,32 @@ class mlknn(object):
         print("one error: ")
         print(evaluate.one_error())
 
+        print("rank loss: ")
+        print(evaluate.rank_loss())
+
+        print("coverage: ")
+        print(evaluate.coverage())
+
 
 
 def get_train_test():
 
+    print("start to  load train data...")
     data, meta = scipy.io.arff.loadarff('../yeast/yeast-train.arff')
     df = pd.DataFrame(data)
 
     X_train = df.iloc[:,:103].values
     y_train = df.astype('int').iloc[:,103:]
-
+    print("load train data finished...")
     #print(type(y_train))
     #logging.log(type(y_train),msg=None)
 
+    print("start to load test data...")
     data, meta = scipy.io.arff.loadarff("../yeast/yeast-test.arff")
     df = pd.DataFrame(data)
     X_test = df.iloc[:,:103].values
     y_test = df.astype('int').iloc[:,103:].values
-
+    print("load test data finished...")
     return np.array(X_train), np.array(y_train), np.array(X_test), np.array(y_test)
 
 if __name__ == "__main__":
