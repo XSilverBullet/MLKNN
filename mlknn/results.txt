@@ -1,0 +1,5 @@
+hanmming loss: mean is 0.197190, std is 0.011522
+one error: mean is 0.312000, std is 0.049603.
+rank loss: mean is 0.173466, std is 0.013740.
+coverage: mean is 6.622667, std is 0.243880.
+average precision: mean is 0.767746, std is 0.000000.

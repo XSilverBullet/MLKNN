@@ -1,5 +1,10 @@
-import  numpy as np
-import operator
+# -*- coding: utf-8 -*-
+"""
+Created on Mon May 14 14:20:55 2018
+@author: Wei Sun
+"""
+
+import numpy as np
 
 '''
 get the k nearest neighbors index and distances
@@ -13,10 +18,12 @@ get the k nearest neighbors index and distances
     sorted_dist_indicies (1, k)
     distances (1, k)
 '''
+
+
 def knn(sample, dataset, k):
     dataset_size = dataset.shape[0]
 
-    #cal distance
+    # cal distance
     diffMat = np.tile(sample, (dataset_size, 1)) - dataset
     sqDiffMat = diffMat ** 2
     sqDistances = sqDiffMat.sum(axis=1)
@@ -25,7 +32,7 @@ def knn(sample, dataset, k):
 
     if k > dataset_size:
         return None, None
-    #print(sorted_dist_indicies)
+    # print(sorted_dist_indicies)
     # class_count = {}
     # for i in range(k):
     #     vote_label = labels[sorted_dist_indicies[i]]
@@ -46,4 +53,3 @@ def knn(sample, dataset, k):
 #    index, distances = knn(dataset[0], dataset, 4)
 #    print(index)
 #    print(distances)
-
